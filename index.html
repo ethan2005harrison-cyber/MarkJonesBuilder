@@ -9,26 +9,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#ffffff;            /* white */
-      --ink:#111111;           /* near black */
-      --muted:#5a5a5a;         /* secondary */
-      --green:#0f6a3a;         /* accent */
-      --green-faint:#e7f3ec;   /* faint wash */
+      --bg:#ffffff;
+      --ink:#111111;
+      --muted:#5a5a5a;
+      --green:#0f6a3a;        /* primary accent */
+      --green-2:#0c5130;      /* deeper accent */
+      --green-faint:#e7f3ec;  /* faint wash */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
 
-    /* Layout */
+    /* Subtle top accent bar */
+    .accent{height:4px;background:linear-gradient(90deg,var(--green),var(--green-2));}
+
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px}
     .top{display:flex;align-items:flex-end;gap:18px}
     h1{font-family:'Work Sans',system-ui,sans-serif;margin:0;font-weight:800;font-size:clamp(32px,6vw,64px);letter-spacing:.2px}
-    .line{font-family:'Work Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#222}
+    .line{font-family:'Work Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green-2)}
     .places{margin-top:2px;color:#2a2a2a;font-weight:700}
 
     /* Green accent underline that sweeps in */
-    .sweep{display:inline;background:linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%);background-size:200% 45%;background-position:100% 88%;animation:sweep 900ms .2s both}
-    @keyframes sweep{to{background-position:0% 88%;}}
+    .sweep{display:inline;background:
+      linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%),
+      linear-gradient(0deg, var(--green) 0, var(--green) 0);
+      background-repeat:no-repeat;
+      background-size:200% 46%, 0 0; /* second layer is a no-op, keeps stacking order safe */
+      background-position:100% 88%, 0 0;
+      animation:sweep 900ms .2s both
+    }
+    @keyframes sweep{to{background-position:0% 88%,0 0}}
 
     /* Sections: clean separators, no boxes */
     section{padding:28px 0;border-top:1px solid #eee}
@@ -36,33 +46,33 @@
 
     .lead{font-size:18px;color:#333;max-width:70ch}
 
-    /* Two columns for intro/contact */
     .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
-    .kv{display:grid;gap:8px}
+    .kv{display:grid;gap:8px;border-left:3px solid var(--green-faint);padding-left:12px}
     .kv div{display:flex;gap:10px}
     .kv label{width:72px;color:#6b6b6b;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
     .kv strong{font-size:20px}
 
     /* Services: simple three columns, no cards */
     .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .services h4{font-family:'Work Sans';margin:0 0 6px}
+    .services h4{font-family:'Work Sans';margin:0 0 6px;color:var(--green-2)}
     .services ul{margin:0;padding-left:18px;color:#333;line-height:1.7}
+    .services li::marker{color:var(--green)}
 
-    /* Gallery: bare placeholders */
+    /* Gallery: bare placeholders with faint green border */
     .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
-    .ph{aspect-ratio:4/3;border-radius:10px;background:#f3f3f3;display:grid;place-items:center;color:#777;font-weight:800}
+    .ph{aspect-ratio:4/3;border-radius:10px;background:#f7faf8;border:1px solid var(--green-faint);display:grid;place-items:center;color:#4f6e60;font-weight:800}
 
-    /* Motion: subtle slide from left/right with stagger */
-    .slide{opacity:0;transform:translateY(8px)}
-    .slide.on{opacity:1;transform:none;transition:opacity .45s ease, transform .45s ease}
-    .stagger>*{opacity:0;transform:translateY(10px)}
+    /* Motion: alt animations — soft rise + slight scale */
+    .rise{opacity:0;transform:translateY(10px) scale(.98)}
+    .rise.on{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
+    .stagger>*{opacity:0;transform:translateY(8px)}
     .stagger.on>*{opacity:1;transform:none}
     .stagger.on>*{transition:opacity .45s ease, transform .45s ease}
-    .stagger.on>*:nth-child(1){transition-delay:.05s}
+    .stagger.on>*:nth-child(1){transition-delay:.04s}
     .stagger.on>*:nth-child(2){transition-delay:.12s}
-    .stagger.on>*:nth-child(3){transition-delay:.19s}
-    .stagger.on>*:nth-child(4){transition-delay:.26s}
-    .stagger.on>*:nth-child(5){transition-delay:.33s}
+    .stagger.on>*:nth-child(3){transition-delay:.20s}
+    .stagger.on>*:nth-child(4){transition-delay:.28s}
+    .stagger.on>*:nth-child(5){transition-delay:.36s}
 
     @media (max-width:900px){
       .cols{grid-template-columns:1fr}
@@ -75,8 +85,9 @@
   </script>
 </head>
 <body>
+  <div class="accent" aria-hidden="true"></div>
   <div class="wrap">
-    <header class="top slide">
+    <header class="top rise">
       <div>
         <h1><span class="sweep">Mark Jones</span></h1>
         <div class="line">Roofing • Building • Domestic Repairs</div>
@@ -84,7 +95,7 @@
       </div>
     </header>
 
-    <section class="cols slide">
+    <section class="cols rise">
       <div>
         <p class="lead">Straightforward, reliable work for homes and small businesses. No fuss. No job too small.</p>
       </div>
@@ -97,7 +108,7 @@
       </aside>
     </section>
 
-    <section class="slide">
+    <section class="rise">
       <h3 class="line">Services</h3>
       <div class="services stagger">
         <div>
@@ -127,7 +138,7 @@
       </div>
     </section>
 
-    <section class="slide">
+    <section class="rise">
       <h3 class="line">Recent Work</h3>
       <div class="gallery stagger">
         <div class="ph">01</div>
@@ -139,26 +150,23 @@
       </div>
     </section>
 
-    <section class="slide" style="border-bottom:1px solid #eee; padding-bottom:22px"></section>
-
-    <footer class="slide" style="padding-top:16px;color:#444">
+    <footer class="rise" style="padding-top:16px;color:#444;border-top:1px solid #eee">
       © <span id="y"></span> Mark Jones — Handyman • Worcester & Callington
     </footer>
   </div>
 
   <script>
-    // slide + stagger animations on view
+    // rise + stagger animations on view
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(e=>{
         if(e.isIntersecting){
           e.target.classList.add('on');
-          e.target.classList.add('on');
           e.target.querySelectorAll('.stagger').forEach(s=>s.classList.add('on'));
-          e.target.classList.add('on');
+          io.unobserve(e.target);
         }
       })
     },{threshold:.12});
-    document.querySelectorAll('.slide, .stagger').forEach(el=>io.observe(el));
+    document.querySelectorAll('.rise, .stagger').forEach(el=>io.observe(el));
     document.getElementById('y').textContent=new Date().getFullYear();
   </script>
 </body>
