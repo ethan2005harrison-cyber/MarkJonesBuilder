@@ -10,11 +10,11 @@
   <style>
     :root{
       --bg:#ffffff;
-      --ink:#111111;
+      --ink:#111111;           /* all text */
       --muted:#5a5a5a;
-      --green:#0f6a3a;        /* primary accent */
-      --green-2:#0c5130;      /* deeper accent */
-      --green-faint:#e7f3ec;  /* faint wash */
+      --green:#0f6a3a;         /* primary accent */
+      --green-2:#0c5130;       /* deeper accent */
+      --green-faint:#e7f3ec;   /* faint wash */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -26,19 +26,20 @@
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px}
     .top{display:flex;align-items:flex-end;gap:18px}
     h1{font-family:'Work Sans',system-ui,sans-serif;margin:0;font-weight:800;font-size:clamp(32px,6vw,64px);letter-spacing:.2px}
-    .line{font-family:'Work Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green-2)}
+    .line{font-family:'Work Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);position:relative;display:inline-block;padding-bottom:6px}
+    .line::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,var(--green),var(--green-2));animation:linegrow .9s .2s both}
+    @keyframes linegrow{to{width:100%}}
     .places{margin-top:2px;color:#2a2a2a;font-weight:700}
 
-    /* Green accent underline that sweeps in */
+    /* Name underline sweep (green background wash, not text) */
     .sweep{display:inline;background:
-      linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%),
-      linear-gradient(0deg, var(--green) 0, var(--green) 0);
+      linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%);
       background-repeat:no-repeat;
-      background-size:200% 46%, 0 0; /* second layer is a no-op, keeps stacking order safe */
-      background-position:100% 88%, 0 0;
+      background-size:200% 46%;
+      background-position:100% 88%;
       animation:sweep 900ms .2s both
     }
-    @keyframes sweep{to{background-position:0% 88%,0 0}}
+    @keyframes sweep{to{background-position:0% 88%;}}
 
     /* Sections: clean separators, no boxes */
     section{padding:28px 0;border-top:1px solid #eee}
@@ -47,22 +48,22 @@
     .lead{font-size:18px;color:#333;max-width:70ch}
 
     .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
-    .kv{display:grid;gap:8px;border-left:3px solid var(--green-faint);padding-left:12px}
+    .kv{display:grid;gap:10px;border-left:3px solid var(--green-faint);padding-left:12px}
     .kv div{display:flex;gap:10px}
     .kv label{width:72px;color:#6b6b6b;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
-    .kv strong{font-size:20px}
+    .kv strong{font-size:20px;color:var(--ink)}
 
     /* Services: simple three columns, no cards */
     .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .services h4{font-family:'Work Sans';margin:0 0 6px;color:var(--green-2)}
+    .services h4{font-family:'Work Sans';margin:0 0 6px;color:var(--ink)}
     .services ul{margin:0;padding-left:18px;color:#333;line-height:1.7}
     .services li::marker{color:var(--green)}
 
-    /* Gallery: bare placeholders with faint green border */
+    /* Gallery: placeholders with faint green border */
     .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
     .ph{aspect-ratio:4/3;border-radius:10px;background:#f7faf8;border:1px solid var(--green-faint);display:grid;place-items:center;color:#4f6e60;font-weight:800}
 
-    /* Motion: alt animations — soft rise + slight scale */
+    /* Motion: rise + slight scale; headings get underline grow */
     .rise{opacity:0;transform:translateY(10px) scale(.98)}
     .rise.on{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
     .stagger>*{opacity:0;transform:translateY(8px)}
@@ -101,7 +102,6 @@
       </div>
       <aside>
         <div class="kv">
-          <div><label>Name</label><strong>Mark Jones</strong></div>
           <div><label>Phone</label><strong>07908 804672</strong></div>
           <div><label>Email</label><strong>quinceyjoner@yahoo.co.uk</strong></div>
         </div>
