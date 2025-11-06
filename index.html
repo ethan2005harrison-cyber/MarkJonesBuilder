@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mark Jones | Roofing, Building & Domestic Repairs</title>
+  <meta name="description" content="Mark Jones — Roofing, Building & Domestic Repairs. 25 years' experience. Call 07908 804672 or email quinceyjoner@yahoo.co.uk" />
+  <meta name="theme-color" content="#184f2d" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --green:#1b6a3b;           /* deep card‑stripe green */
+      --green-2:#184f2d;         /* darker for hover/headers */
+      --ink:#1a1a1a;             /* body text */
+      --muted:#6b6b6b;           /* secondary text */
+      --paper:#ffffff;           /* background */
+      --accent:#0f884b;          /* buttons focus */
+      --card:#f7f7f7;
+      --radius:16px;
+      --shadow:0 6px 24px rgba(0,0,0,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--paper);}    
+    /* Top stripe motif */
+    .stripe{height:6px;background:linear-gradient(90deg,var(--green),var(--green-2));}
+    header{position:sticky;top:0;z-index:30;background:var(--paper);box-shadow:0 2px 12px rgba(0,0,0,.04)}
+    .wrap{max-width:1100px;margin:0 auto;padding:clamp(16px,2.2vw,24px)}
+    .row{display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand .logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(145deg,var(--green),var(--green-2));box-shadow:inset 0 0 0 4px rgba(255,255,255,.5)}
+    .brand h1{font-family:Merriweather,Georgia,serif;font-size:22px;letter-spacing:.3px;margin:0}
+    nav a{color:var(--ink);text-decoration:none;margin:0 10px;font-weight:600}
+    nav a:hover{color:var(--green)}
+
+    /* Hero */
+    .hero{position:relative;isolation:isolate;}
+    .hero .bg{position:absolute;inset:0;background:
+      radial-gradient(1200px 600px at 10% 10%, rgba(27,106,59,.08), transparent 60%),
+      radial-gradient(900px 500px at 90% 20%, rgba(24,79,45,.1), transparent 60%)}
+    .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;padding-block:48px}
+    .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--green-2);font-weight:700;background:#eaf5ef;border:1px solid #cfe7da;border-radius:999px;padding:8px 14px;font-size:13px}
+    h2{font-family:Merriweather,Georgia,serif;font-weight:900;line-height:1.05;margin:12px 0 10px;font-size:clamp(28px,5vw,48px)}
+    .hero p{color:var(--muted);font-size:clamp(15px,1.5vw,18px)}
+    .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+    .btn{appearance:none;border:none;border-radius:12px;padding:14px 18px;font-weight:800;cursor:pointer;transition:transform .08s ease, box-shadow .2s ease;background:var(--green);color:white;box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px);background:var(--green-2)}
+    .btn.outline{background:transparent;border:2px solid var(--green);color:var(--green)}
+    .badge{display:inline-block;background:var(--card);border:1px solid #eaeaea;border-radius:999px;padding:8px 12px;font-weight:700}
+
+    /* Services */
+    .section{padding:48px 0}
+    .section h3{font-family:Merriweather,Georgia,serif;font-size:28px;margin:0 0 10px}
+    .section p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:20px}
+    .card{background:var(--paper);border:1px solid #eee;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h4{margin:0 0 6px;font-size:18px}
+    .card ul{margin:10px 0 0 18px;color:#5a5a5a}
+
+    /* Gallery */
+    .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:16px}
+    .ph{aspect-ratio:4/3;border-radius:14px;background:linear-gradient(145deg,#ececec,#f7f7f7);border:1px solid #e9e9e9;display:grid;place-items:center;color:#999;font-weight:700}
+
+    /* Contact */
+    .contact-card{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start;margin-top:16px}
+    .stack{display:grid;gap:10px}
+    .info{background:var(--paper);border:1px solid #eee;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .info a{font-weight:800;color:var(--green);text-decoration:none}
+    .info a:hover{text-decoration:underline}
+
+    /* Footer */
+    footer{margin-top:40px;padding:28px 0;border-top:1px solid #eee;background:#fafafa;color:#666}
+
+    /* Mobile */
+    @media (max-width:900px){
+      .hero .wrap{grid-template-columns:1fr}
+      .contact-card{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{display:none}
+    }
+
+    /* Sticky call bar on mobile */
+    .sticky-call{position:fixed;inset:auto 0 0 0;background:linear-gradient(90deg,var(--green),var(--green-2));color:#fff;padding:10px 14px;display:flex;gap:10px;align-items:center;justify-content:center;z-index:50;box-shadow:0 -8px 24px rgba(0,0,0,.18)}
+    .sticky-call a{color:#fff;text-decoration:none;font-weight:900}
+    @media (min-width:901px){.sticky-call{display:none}}
+  </style>
+  
+  <!-- LocalBusiness Schema (fill in address/area if you want) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Mark Jones",
+    "description": "Roofing, Building & Domestic Repairs. 25 years' experience.",
+    "image": "/assets/mark-jones-logo.png",
+    "areaServed": "",
+    "telephone": "+44 7908 804672",
+    "email": "quinceyjoner@yahoo.co.uk",
+    "url": "https://example.com"
+  }
+  </script>
+</head>
+<body>
+  <div class="stripe" aria-hidden="true"></div>
+  <header>
+    <div class="wrap row">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Mark Jones</h1>
+      </div>
+      <nav aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div>
+        <span class="kicker">25 Years' Experience • Fully Insured</span>
+        <h2>Roofing, Building & Domestic Repairs you can trust.</h2>
+        <p>Local, reliable, and tidy workmanship. From slate and tile repairs to brickwork, pointing, gutters, doors, floors and more — no job too small.</p>
+        <div class="cta">
+          <a class="btn" href="tel:+447908804672">Call 07908 804672</a>
+          <a class="btn outline" href="mailto:quinceyjoner@yahoo.co.uk?subject=Website%20enquiry">Email Mark</a>
+          <span class="badge">Free quotations</span>
+        </div>
+      </div>
+      <div class="info">
+        <strong>Quick contact</strong>
+        <div class="stack" style="margin-top:8px">
+          <div>📞 <a href="tel:+447908804672">07908 804672</a></div>
+          <div>✉️ <a href="mailto:quinceyjoner@yahoo.co.uk">quinceyjoner@yahoo.co.uk</a></div>
+          <div>🕘 Mon–Sat, 8am–6pm <em style="color:var(--muted)">(flexible)</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="wrap">
+      <h3>Services</h3>
+      <p>All general building and maintenance, handled to a high standard.</p>
+      <div class="grid">
+        <div class="card">
+          <h4>Roofing</h4>
+          <ul>
+            <li>Tile & slate repairs</li>
+            <li>Leadwork & flashing</li>
+            <li>Chimney repointing & capping</li>
+            <li>Gutters, fascia & soffits</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Building</h4>
+          <ul>
+            <li>Bricklaying & blockwork</li>
+            <li>Pointing & patching</li>
+            <li>Lintels, doors & windows</li>
+            <li>Fence & gate fitting</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Domestic Repairs</h4>
+          <ul>
+            <li>Plaster patch repairs</li>
+            <li>Flooring & skirting</li>
+            <li>Kitchen & bathroom fixes</li>
+            <li>General handyman work</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section" style="background:#fbfbfb;border-block:1px solid #eee;">
+    <div class="wrap">
+      <h3>Recent Work</h3>
+      <p>Drop photos in <code>/assets/work/</code> with names 01–06.jpg — these placeholders will make room for them.</p>
+      <div class="gallery">
+        <div class="ph">Photo 01</div>
+        <div class="ph">Photo 02</div>
+        <div class="ph">Photo 03</div>
+        <div class="ph">Photo 04</div>
+        <div class="ph">Photo 05</div>
+        <div class="ph">Photo 06</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="wrap">
+      <h3>Get a free quote</h3>
+      <div class="contact-card">
+        <div class="info">
+          <p><strong>Call:</strong> <a href="tel:+447908804672">07908 804672</a><br>
+          <strong>Email:</strong> <a href="mailto:quinceyjoner@yahoo.co.uk">quinceyjoner@yahoo.co.uk</a></p>
+          <p><strong>Typical hours:</strong> Mon–Sat, 8am–6pm</p>
+          <p style="color:var(--muted)">Based locally • Friendly service • No job too small</p>
+        </div>
+        <form class="info" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact">
+          <label>Full name<br>
+            <input required name="name" placeholder="Your name" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px">
+          </label>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+            <label>Phone<br>
+              <input name="phone" placeholder="Optional" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px">
+            </label>
+            <label>Email<br>
+              <input required type="email" name="email" placeholder="name@example.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px">
+            </label>
+          </div>
+          <label style="display:block;margin-top:10px">How can I help?<br>
+            <textarea required name="message" rows="5" placeholder="Tell me about the job" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ddd;margin-top:6px"></textarea>
+          </label>
+          <button class="btn" style="margin-top:12px;width:100%" type="submit">Send enquiry</button>
+          <p style="color:var(--muted);font-size:13px;margin:8px 0 0">Prefer email or a quick call? Use the buttons up top.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap row" style="justify-content:space-between">
+      <div>© <span id="y"></span> Mark Jones — Roofing, Building & Domestic Repairs</div>
+      <div>Site by <a href="#" style="color:var(--green);font-weight:700;text-decoration:none">your studio</a></div>
+    </div>
+  </footer>
+
+  <div class="sticky-call">
+    <a href="tel:+447908804672">Call 07908 804672</a>
+    <span style="opacity:.6">•</span>
+    <a href="mailto:quinceyjoner@yahoo.co.uk">Email</a>
+  </div>
+
+  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
