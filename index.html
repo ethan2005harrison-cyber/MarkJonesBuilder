@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- build: v1.0.3 ampersand fix -->
+  <!-- build: v1.0.4 places ampersand hard-fix -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mark Jones | Roofing, Building & Domestic Repairs</title>
@@ -11,70 +11,47 @@
   <style>
     :root{
       --bg:#ffffff;
-      --ink:#111111;           /* all text */
+      --ink:#111111;
       --muted:#5a5a5a;
-      --green:#0f6a3a;         /* primary accent */
-      --green-2:#0c5130;       /* deeper accent */
-      --green-faint:#e7f3ec;   /* faint wash */
+      --green:#0f6a3a;
+      --green-2:#0c5130;
+      --green-faint:#e7f3ec;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-
-    /* Subtle top accent bar */
     .accent{height:4px;background:linear-gradient(90deg,var(--green),var(--green-2));}
-
     .wrap{max-width:980px;margin:0 auto;padding:28px 20px}
     .top{display:flex;align-items:flex-end;gap:18px}
-    h1{font-family:'Work Sans',system-ui,sans-serif;margin:0;font-weight:800;font-size:clamp(32px,6vw,64px);letter-spacing:.2px}
+    h1{font-family:'Work Sans',system-ui,sans-serif;margin:0;font-weight:800;font-size:clamp(32px,6vw,64px)}
     .line{font-family:'Work Sans',system-ui,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);position:relative;display:inline-block;padding-bottom:6px}
     .line::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,var(--green),var(--green-2));animation:linegrow .9s .2s both}
     @keyframes linegrow{to{width:100%}}
     .places{margin-top:2px;color:#2a2a2a;font-weight:700}
-
-    /* Name underline sweep (green background wash, not text) */
-    .sweep{display:inline;background:
-      linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%);
-      background-repeat:no-repeat;
-      background-size:200% 46%;
-      background-position:100% 88%;
-      animation:sweep 900ms .2s both
-    }
+    .sweep{display:inline;background:linear-gradient(120deg,transparent 0,transparent 50%, var(--green-faint) 50%, var(--green-faint) 100%);background-repeat:no-repeat;background-size:200% 46%;background-position:100% 88%;animation:sweep 900ms .2s both}
     @keyframes sweep{to{background-position:0% 88%;}}
-
-    /* Sections: clean separators, no boxes */
     section{padding:28px 0;border-top:1px solid #eee}
     section:first-of-type{border-top:none}
-
     .lead{font-size:18px;color:#333;max-width:70ch}
-
     .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
     .kv{display:grid;gap:10px;border-left:3px solid var(--green-faint);padding-left:12px}
     .kv div{display:flex;gap:10px}
     .kv label{width:72px;color:#6b6b6b;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
     .kv strong{font-size:20px;color:var(--ink)}
-
-    /* Services: simple three columns, no cards */
     .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
     .services h4{font-family:'Work Sans';margin:0 0 6px;color:var(--ink)}
     .services ul{margin:0;padding-left:18px;color:#333;line-height:1.7}
     .services li::marker{color:var(--green)}
-
-    /* Quote form: minimalist fields (no heavy boxes) */
     .quote{display:grid;gap:12px;margin-top:12px}
     .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
     .field label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b6b;margin-bottom:6px}
-    .field input,.field textarea{width:100%;padding:12px 12px;border:1px solid #ddd;border-radius:10px;font:inherit;color:var(--ink);background:#fff;outline:none}
+    .field input,.field textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font:inherit;color:var(--ink);background:#fff;outline:none}
     .field input:focus,.field textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-faint)}
     .field textarea{min-height:120px;resize:vertical}
     .submit{appearance:none;border:none;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--green),var(--green-2));color:#fff}
     .submit:focus{outline:none;box-shadow:0 0 0 3px var(--green-faint)}
-
-    /* Gallery: placeholders with faint green border */
     .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
     .ph{aspect-ratio:4/3;border-radius:10px;background:#f7faf8;border:1px solid var(--green-faint);display:grid;place-items:center;color:#4f6e60;font-weight:800}
-
-    /* Motion: rise + slight scale; headings get underline grow */
     .rise{opacity:0;transform:translateY(10px) scale(.98)}
     .rise.on{opacity:1;transform:none;transition:opacity .5s ease, transform .5s ease}
     .stagger>*{opacity:0;transform:translateY(8px)}
@@ -85,7 +62,6 @@
     .stagger.on>*:nth-child(3){transition-delay:.20s}
     .stagger.on>*:nth-child(4){transition-delay:.28s}
     .stagger.on>*:nth-child(5){transition-delay:.36s}
-
     @media (max-width:900px){
       .cols{grid-template-columns:1fr}
       .services{grid-template-columns:1fr}
@@ -152,7 +128,6 @@
 
     <section class="rise" id="quote">
       <h3 class="line">Get a Quote</h3>
-      <!-- Formspree with custom popup validation disabled via novalidate -->
       <form class="quote" action="https://formspree.io/f/xqagrjnv" method="POST" novalidate>
         <div class="quote-grid">
           <div class="field">
@@ -206,6 +181,23 @@
     },{threshold:.12});
     document.querySelectorAll('.rise, .stagger').forEach(el=>io.observe(el));
     document.getElementById('y').textContent=new Date().getFullYear();
+
+    // ----- HARD FIX for "Worcester • Callington" no matter what -----
+    (function(){
+      const normalize = s => s
+        .replace(/[•·⋅∙]/g, ' & ')       // any bullet/middle dots -> ampersand
+        .replace(/\s*&\s*/g, ' & ')      // tidy spaces around &
+        .replace(/\s{2,}/g, ' ')         // collapse doubles
+        .trim();
+
+      const places = document.querySelectorAll('.places');
+      places.forEach(el => {
+        const txt = el.textContent || '';
+        const next = normalize(txt);
+        // Always set explicitly to safe HTML entity
+        el.innerHTML = next.includes('&') ? next.replace('&', '&amp;') : 'Worcester &amp; Callington';
+      });
+    })();
   </script>
 
   <!-- Custom modal for validation -->
@@ -232,6 +224,7 @@
   </style>
 
   <script>
+    // Custom popup validation for Formspree form
     (function(){
       var form = document.querySelector('form.quote');
       if(!form) return;
@@ -262,9 +255,7 @@
       modalBackdrop.addEventListener('click', function(e){ if(e.target === modalBackdrop){ closeModal(); }});
       window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
 
-      function isValidEmail(v){
-        return v.indexOf('@') > 0 && v.indexOf('.') > v.indexOf('@') + 1;
-      }
+      function isValidEmail(v){ return v.indexOf('@') > 0 && v.indexOf('.') > v.indexOf('@') + 1; }
       function findInvalid(form){
         var fields = form.querySelectorAll('[required]');
         for(var i=0;i<fields.length;i++){
@@ -275,7 +266,6 @@
         }
         return null;
       }
-
       form.addEventListener('submit', function(e){
         var invalid = findInvalid(form);
         if(invalid){
