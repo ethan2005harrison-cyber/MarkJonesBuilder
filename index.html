@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mark Jones | Roofing, Building & Domestic Repairs</title>
-  <meta name="description" content="Mark Jones — Handyman & Builder. Roofing, Building & Domestic Repairs. Worcester & Callington. Phone 07908 804672. Email quinceyjoner@yahoo.co.uk" />
+  <meta name="description" content="Mark Jones — Handyman & Builder. Roofing, Building & Domestic Repairs. Worcester &amp; Callington. Phone 07908 804672. Email quinceyjoner@yahoo.co.uk" />
   <meta name="theme-color" content="#0f6a3a" />
   <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@500;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -103,7 +103,7 @@
       <div>
         <h1><span class="sweep">Mark Jones</span></h1>
         <div class="line">Roofing • Building • Domestic Repairs</div>
-        <div class="places">Worcester & Callington</div>
+        <div class="places">Worcester &amp; Callington</div>
       </div>
     </header>
 
@@ -151,16 +151,16 @@
 
     <section class="rise" id="quote">
       <h3 class="line">Get a Quote</h3>
-      <!-- Swap data-netlify for a Formspree action when you have an endpoint -->
+      <!-- Formspree with custom popup validation disabled via novalidate -->
       <form class="quote" action="https://formspree.io/f/xqagrjnv" method="POST" novalidate>
         <div class="quote-grid">
           <div class="field">
             <label for="q-name">Full name</label>
-            <input id="q-name" name="name" required placeholder="Your name" oninvalid="this.setCustomValidity('Please fill in this box')" oninput="this.setCustomValidity('')" />
+            <input id="q-name" name="name" required placeholder="Your name" />
           </div>
           <div class="field">
             <label for="q-email">Email</label>
-            <input id="q-email" type="email" name="email" required placeholder="name@example.com" oninvalid="this.setCustomValidity('Please fill in this box')" oninput="this.setCustomValidity('')" />
+            <input id="q-email" type="email" name="email" required placeholder="name@example.com" />
           </div>
         </div>
         <div class="field">
@@ -169,7 +169,7 @@
         </div>
         <div class="field">
           <label for="q-message">Job description</label>
-          <textarea id="q-message" name="message" required placeholder="Tell me about the job" oninvalid="this.setCustomValidity('Please fill in this box')" oninput="this.setCustomValidity('')"></textarea>
+          <textarea id="q-message" name="message" required placeholder="Tell me about the job"></textarea>
         </div>
         <button class="submit" type="submit">Send enquiry</button>
       </form>
@@ -188,7 +188,7 @@
     </section>
 
     <footer class="rise" style="padding-top:16px;color:#444;border-top:1px solid #eee">
-      © <span id="y"></span> Mark Jones Builder,  Worcester & Callington
+      © <span id="y"></span> Mark Jones Builder,  Worcester &amp; Callington
     </footer>
   </div>
 
@@ -206,8 +206,8 @@
     document.querySelectorAll('.rise, .stagger').forEach(el=>io.observe(el));
     document.getElementById('y').textContent=new Date().getFullYear();
   </script>
-  
-  <!-- Custom modal -->
+
+  <!-- Custom modal for validation -->
   <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:20px;z-index:100">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" style="width:min(520px,100%);background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.2);transform:translateY(12px) scale(.98);opacity:0">
       <header style="padding:16px 18px;border-bottom:1px solid #f1f1f1">
