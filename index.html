@@ -59,6 +59,16 @@
     .services ul{margin:0;padding-left:18px;color:#333;line-height:1.7}
     .services li::marker{color:var(--green)}
 
+    /* Quote form: minimalist fields (no heavy boxes) */
+    .quote{display:grid;gap:12px;margin-top:12px}
+    .quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6b6b6b;margin-bottom:6px}
+    .field input,.field textarea{width:100%;padding:12px 12px;border:1px solid #ddd;border-radius:10px;font:inherit;color:var(--ink);background:#fff;outline:none}
+    .field input:focus,.field textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green-faint)}
+    .field textarea{min-height:120px;resize:vertical}
+    .submit{appearance:none;border:none;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer;background:linear-gradient(90deg,var(--green),var(--green-2));color:#fff}
+    .submit:focus{outline:none;box-shadow:0 0 0 3px var(--green-faint)}
+
     /* Gallery: placeholders with faint green border */
     .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
     .ph{aspect-ratio:4/3;border-radius:10px;background:#f7faf8;border:1px solid var(--green-faint);display:grid;place-items:center;color:#4f6e60;font-weight:800}
@@ -79,6 +89,7 @@
       .cols{grid-template-columns:1fr}
       .services{grid-template-columns:1fr}
       .gallery{grid-template-columns:repeat(3,1fr)}
+      .quote-grid{grid-template-columns:1fr}
     }
   </style>
   <script type="application/ld+json">
@@ -136,6 +147,36 @@
           </ul>
         </div>
       </div>
+    </section>
+
+    <section class="rise" id="quote">
+      <h3 class="line">Get a Quote</h3>
+      <!-- Swap data-netlify for a Formspree action when you have an endpoint -->
+      <form class="quote" name="quote" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="quote" />
+        <p style="display:none">
+          <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+        </p>
+        <div class="quote-grid">
+          <div class="field">
+            <label for="q-name">Full name</label>
+            <input id="q-name" name="name" required placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="q-email">Email</label>
+            <input id="q-email" type="email" name="email" required placeholder="name@example.com" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="q-phone">Phone</label>
+          <input id="q-phone" name="phone" placeholder="Optional" />
+        </div>
+        <div class="field">
+          <label for="q-message">Job description</label>
+          <textarea id="q-message" name="message" required placeholder="Tell me about the job"></textarea>
+        </div>
+        <button class="submit" type="submit">Send enquiry</button>
+      </form>
     </section>
 
     <section class="rise">
