@@ -206,5 +206,87 @@
     document.querySelectorAll('.rise, .stagger').forEach(el=>io.observe(el));
     document.getElementById('y').textContent=new Date().getFullYear();
   </script>
+  
+  <!-- Custom modal -->
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true" style="position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:20px;z-index:100">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" style="width:min(520px,100%);background:#fff;border:1px solid #eee;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.2);transform:translateY(12px) scale(.98);opacity:0">
+      <header style="padding:16px 18px;border-bottom:1px solid #f1f1f1">
+        <h4 id="modal-title" style="margin:0;font-family:'Work Sans';font-size:18px">Please fill in this box</h4>
+      </header>
+      <div class="content" id="modal-desc" style="padding:16px 18px;color:#333">
+        Looks like you missed a required field. Please complete it to send your enquiry.
+      </div>
+      <div class="actions" style="display:flex;gap:10px;justify-content:flex-end;padding:14px 18px;border-top:1px solid #f1f1f1">
+        <button class="btn-outline" id="modal-cancel" type="button" style="appearance:none;border:1px solid #ddd;border-radius:10px;padding:10px 14px;font-weight:700;background:#fff;color:#111;cursor:pointer">Close</button>
+        <button class="btn-primary" id="modal-focus" type="button" style="appearance:none;border:none;border-radius:10px;padding:10px 14px;font-weight:800;background:linear-gradient(90deg,#0f6a3a,#0c5130);color:#fff;cursor:pointer">Go to field</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .modal-backdrop.show{display:flex}
+    .modal.show{opacity:1;transform:none;transition:opacity .22s ease, transform .22s ease}
+    .shake{animation:shake .35s ease}
+    @keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-4px)}50%{transform:translateX(4px)}75%{transform:translateX(-3px)}100%{transform:translateX(0)}}
+  </style>
+
+  <script>
+    (function(){
+      var form = document.querySelector('form.quote');
+      if(!form) return;
+      var modalBackdrop = document.getElementById('modal-backdrop');
+      var modalBox = modalBackdrop.querySelector('.modal');
+      var btnClose = document.getElementById('modal-cancel');
+      var btnFocus = document.getElementById('modal-focus');
+      var targetField = null;
+
+      function openModal(message, field){
+        targetField = field || null;
+        if(message){ document.getElementById('modal-desc').textContent = message; }
+        modalBackdrop.classList.add('show');
+        modalBox.classList.add('show');
+        modalBackdrop.removeAttribute('aria-hidden');
+        btnFocus.focus();
+      }
+      function closeModal(){
+        modalBackdrop.classList.remove('show');
+        modalBox.classList.remove('show');
+        modalBackdrop.setAttribute('aria-hidden','true');
+      }
+      btnClose.addEventListener('click', closeModal);
+      btnFocus.addEventListener('click', function(){
+        closeModal();
+        if(targetField){ targetField.focus(); targetField.scrollIntoView({behavior:'smooth', block:'center'}); }
+      });
+      modalBackdrop.addEventListener('click', function(e){ if(e.target === modalBackdrop){ closeModal(); }});
+      window.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+      function isValidEmail(v){
+        return v.indexOf('@') > 0 && v.indexOf('.') > v.indexOf('@') + 1;
+      }
+      function findInvalid(form){
+        var fields = form.querySelectorAll('[required]');
+        for(var i=0;i<fields.length;i++){
+          var el = fields[i];
+          var val = (el.value || '').trim();
+          if(!val) return el;
+          if(el.type === 'email' && !isValidEmail(val)) return el;
+        }
+        return null;
+      }
+
+      form.addEventListener('submit', function(e){
+        var invalid = findInvalid(form);
+        if(invalid){
+          e.preventDefault();
+          var label = form.querySelector('label[for="'+ invalid.id +'"]');
+          var name = label ? label.textContent.trim() : 'a required field';
+          openModal('Please fill in: ' + name, invalid);
+          invalid.classList.add('shake');
+          setTimeout(function(){ invalid.classList.remove('shake'); }, 500);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
